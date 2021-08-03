@@ -7,7 +7,6 @@
             ToDo List
           </div>
         </v-row>
-        <v-btn>リクエスト</v-btn>
         <div class="mt-4 pb-1">
           <ToolBar @addTask="addTask" @option="emitOption" />
         </div>
@@ -44,7 +43,14 @@ export default {
         memo: "",
         status: false,
       },
-      option: null,
+      option: {
+        todo: true,
+        done: true,
+        sort: "limit",
+        order: "de",
+        number: 10,
+        search: "",
+      },
     };
   },
   computed: {},

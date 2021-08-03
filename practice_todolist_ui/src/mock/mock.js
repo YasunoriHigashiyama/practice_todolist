@@ -7,7 +7,6 @@ const initialData = () => ({
         { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
         { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
     ],
-    option: { todo: false, done: true, sort: "ac", order: "start", number: "20" }
 })
 // option: { todo: true, done: true, sort: "ac", order: "start", number: "20" }
 let data = initialData()
@@ -23,10 +22,10 @@ export default {
 
     run: client => {
         const mock = new MockAdapter(axios)
-
-
         mock.onGet('/tasks').reply(config => {
             console.log("タスクの全取得")
+            console.log(config.params)
+
             //タスクとってくる
             return [200, initialData()]
         }),

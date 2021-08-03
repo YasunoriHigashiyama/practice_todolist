@@ -136,9 +136,9 @@ export default {
       defaultOption: {
         todo: true,
         done: true,
-        sort: "start",
-        order: "ac",
-        number: 10,
+        sort: "limit",
+        order: "de",
+        number: 20,
         search: "",
       },
     };
