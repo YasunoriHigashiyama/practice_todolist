@@ -1,11 +1,15 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter';
 
-const initialData = () => ([
-    { id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
-    { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
-    { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
-])
+const initialData = () => ({
+    data: [
+        { id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
+        { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
+        { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
+    ],
+    option: { todo: false, done: true, sort: "ac", order: "start", number: "20" }
+})
+// option: { todo: true, done: true, sort: "ac", order: "start", number: "20" }
 let data = initialData()
 /* eslint no-unused-vars: 0 */
 function urlCheck(path = '') {
@@ -22,30 +26,39 @@ export default {
 
 
         mock.onGet('/tasks').reply(config => {
+            console.log("タスクの全取得")
+            //タスクとってくる
             return [200, initialData()]
         }),
             mock.onPost('/task').reply(config => {
-                const res = [
-                    { id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
+                console.log("タスクの追加")
+                //タスク追加する
+                const res = {
+                    data: [{ id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
                     { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
                     { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
-                    { id: "201901011299", title: '追加した結果のダミータスク', start: '2019/01/01', limit: '2020/01/01', memo: "", status: false },
-                ]
+                    { id: "201901011299", title: '追加した結果のダミータスク', start: '2019/01/01', limit: '2020/01/01', memo: "", status: false }]
+                };
+
+
                 return [200, res]
             }),
             mock.onPost('/delete/task').reply(config => {
-                console.log(config)
-                var res = [
-                    { id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
-                    { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
-                    { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
-                    { id: "201901011299", title: '追加した結果のダミータスク', start: '2019/01/01', limit: '2020/01/01', memo: "", status: false },
-                ]
+                //タスク消す
+                console.log("タスクの削除")
+                var res = {
+                    data: [
+                        { id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
+                        { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
+                        { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
+                        { id: "201901011299", title: '追加した結果のダミータスク', start: '2019/01/01', limit: '2020/01/01', memo: "", status: false },
+                    ]
+                }
                 let number = null;
-                console.log(config.data)
-                for (var i in res) {
-                    if (res[i].id == config.data) {
-                        res.splice(i, 1);
+
+                for (var i in res.data) {
+                    if (res.data[i].id == config.data) {
+                        res.data.splice(i, 1);
                         return [200, res]
                     }
                 }

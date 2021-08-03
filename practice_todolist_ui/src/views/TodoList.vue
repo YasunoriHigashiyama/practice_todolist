@@ -7,9 +7,9 @@
             ToDo List
           </div>
         </v-row>
-
+        <v-btn>リクエスト</v-btn>
         <div class="mt-4 pb-1">
-          <ToolBar @addTask="addTask" />
+          <ToolBar @addTask="addTask" @option="emitOption" />
         </div>
         <v-divider></v-divider>
 
@@ -44,6 +44,7 @@ export default {
         memo: "",
         status: false,
       },
+      option: null,
     };
   },
   computed: {},
@@ -52,10 +53,12 @@ export default {
   },
   methods: {
     getTasks() {
+      let params = this.option;
       this.$axios
-        .get("/tasks")
+        .get("/tasks", { params })
         .then((response) => {
-          this.tasks = response.data;
+          this.tasks = response.data.data;
+          this.option = response.data.option;
         })
         .catch((e) => {
           alert(e);
@@ -65,7 +68,7 @@ export default {
       this.$axios
         .post("/task", task)
         .then((response) => {
-          this.tasks = response.data;
+          this.tasks = response.data.data;
         })
         .catch((e) => {
           alert(e);
@@ -74,12 +77,19 @@ export default {
     emitTask() {
       console.log("a");
     },
+    emitOption(option) {
+      console.log("👀✨");
+      console.log(option);
+      this.option = option;
+      this.getTasks(option);
+    },
     deleteTask(ref) {
       var id = this.$refs[ref][0].task.id;
       this.$axios
         .post("/delete/task", id)
         .then((response) => {
-          this.tasks = response.data;
+          this.tasks = response.data.data;
+          this.option = response.data.option;
         })
         .catch((e) => {
           alert(e);

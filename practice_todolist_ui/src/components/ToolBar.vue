@@ -2,9 +2,10 @@
   <v-row>
     <CreateTaskDialog @addTask="addTask" />
     <v-spacer></v-spacer>
-    {{ option }}
+
     <v-checkbox
-      v-model="todo"
+      v-model="defaultOption.todo"
+      @change="onChange($event)"
       class="ma-2"
       color="primary"
       hide-details
@@ -12,7 +13,8 @@
     ></v-checkbox>
 
     <v-checkbox
-      v-model="done"
+      @change="onChange($event)"
+      v-model="defaultOption.done"
       class="ma-2 my-checkbox"
       color="primary"
       hide-details
@@ -41,71 +43,122 @@
               <p class="text-center">Sort</p>
             </v-col>
             <v-btn-toggle
+              @change="onChange($event)"
               tile
-              v-model="sort"
+              v-model="defaultOption.sort"
               mandatory
               color="deep-purple accent-3"
             >
-              <v-btn> START </v-btn>
-              <v-btn> LIMIT </v-btn>
-              <v-btn> CREATE </v-btn>
-              <v-btn> TITLE </v-btn>
+              <v-btn
+                v-for="list in sortList"
+                :key="list.value"
+                :value="list.sort"
+                style="white-space: pre-wrap; word-wrap: break-word"
+                >{{ list.value }}
+              </v-btn>
             </v-btn-toggle>
             <v-col cols="12">
               <p class="text-center">Order</p>
             </v-col>
             <v-btn-toggle
               tile
-              v-model="orfer"
+              @change="onChange($event)"
+              v-model="defaultOption.order"
               mandatory
               color="deep-purple accent-3"
             >
-              <v-btn> AS </v-btn>
-              <v-btn> DE </v-btn>
+              <v-btn
+                v-for="list in orderList"
+                :key="list.icon"
+                :value="list.order"
+              >
+                <v-icon>{{ list.icon }}</v-icon>
+              </v-btn>
             </v-btn-toggle>
+
             <v-col cols="12">
-              <p class="text-center">表示件数</p>
+              <p class="text-center mb-0 mt-4">表示件数</p>
             </v-col>
-            <v-col>
-              <v-slider
-                v-model="number"
-                thumb-color="deep-purple accent-3"
-                thumb-label="always"
-                max="100"
-                min="10"
-              ></v-slider>
+
+            <v-col cols="6">
+              <v-select
+                v-model="defaultOption.number"
+                :items="numberList"
+                item-text="number"
+                single-line
+                @change="onChange($event)"
+                dense
+              ></v-select>
             </v-col>
           </v-row>
         </v-card>
       </v-menu>
     </div>
-    <v-chip class="ma-2" color="white" label text-color="gray">
-      <v-icon left> mdi-magnify </v-icon>
-      Search
-    </v-chip>
+    <v-text-field
+      v-model="defaultOption.search"
+      class="mb-2"
+      prepend-inner-icon=" mdi-magnify"
+      label="Search"
+      outlined
+      hide-details
+      dense
+      @input="input($event)"
+    ></v-text-field>
   </v-row>
 </template>
+
 <script>
 import CreateTaskDialog from "./CreateTaskDialog.vue";
 export default {
   components: { CreateTaskDialog },
+
   data() {
-    return { todo: true, done: true, sort: "", number: 20 };
-  },
-  computed: {
-    option() {
-      //As 昇順 De 降順
+    return {
+      select: { number: 20 },
+      numberList: [
+        { number: 10 },
+        { number: 20 },
+        { number: 30 },
+        { number: 40 },
+        { number: 50 },
+      ],
+      sortList: [
+        { value: "START\nDATE", sort: "start" },
+        { value: "LIMIT\nDATE", sort: "limit" },
+        { value: "CREATE\nDATE", sort: "create" },
+        { value: "TITLE", sort: "title" },
+      ],
+      orderList: [
+        { icon: "mdi-menu-up", order: "ac" },
+        { icon: "mdi-menu-down", order: "de" },
+      ],
 
-      let option = new Object();
-      option["todo"] = this.todo;
-      option["done"] = this.done;
-
-      return option;
-    },
+      defaultOption: {
+        todo: true,
+        done: true,
+        sort: "start",
+        order: "ac",
+        number: 10,
+        search: "",
+      },
+    };
   },
+  computed: {},
+
+  mounted() {},
+
   methods: {
     addTask(task) {
       this.$emit("addTask", task);
+    },
+    updateOption() {
+      this.$emit("option", this.defaultOption);
+    },
+    onChange() {
+      this.updateOption();
+    },
+    input() {
+      this.updateOption();
     },
   },
 };
