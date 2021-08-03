@@ -1,15 +1,5 @@
 <template>
   <v-row>
-    <v-chip
-      class="ma-2 mt-5"
-      color="white"
-      label
-      text-color="gray"
-      @click="open()"
-    >
-      <v-icon left> mdi-plus </v-icon>
-      Add Task
-    </v-chip>
     <v-dialog
       v-model="dialog"
       transition="dialog-bottom-transition"
@@ -142,10 +132,11 @@ export default {
         memo: "",
       }),
     },
+    dialog: { type: Boolean, default: false },
   },
   data() {
     return {
-      dialog: false,
+      // dialog: false,
       start: false,
       limit: false,
       copyTask: {},
@@ -186,7 +177,7 @@ export default {
         return;
       }
       this.$emit("addTask", this.copyTask);
-      this.dialog = false;
+      // this.dialog = false;
     },
   },
 };

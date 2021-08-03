@@ -4,7 +4,7 @@
     <v-card class="mx-auto" width="344">
       <v-row class="mr-3">
         <v-card-subtitle class="ml-3"> {{ copyTask.id }}</v-card-subtitle>
-        <v-spacer></v-spacer><copyTaskMenu @edit="edit" @delete="del"
+        <v-spacer></v-spacer><TaskMenu @edit="edit" @delete="del"
       /></v-row>
       <v-card-title class="pt-0">
         <v-checkbox
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import copyTaskMenu from "./TaskMenu.vue";
+import TaskMenu from "./TaskMenu.vue";
 export default {
   props: {
     task: {
@@ -53,7 +53,7 @@ export default {
       default: () => {},
     },
   },
-  components: { copyTaskMenu },
+  components: { TaskMenu },
   data() {
     return {
       show: false,
