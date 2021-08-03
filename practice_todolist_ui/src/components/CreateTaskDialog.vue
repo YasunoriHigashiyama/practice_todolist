@@ -156,13 +156,7 @@ export default {
       return message;
     },
   },
-  mounted() {
-    // console.log(this.task);
-    // this.copyTask = Object.assign({}, this.task);
-    // if (this.copyTask.id.length <= 0) {
-    //   this.getId();
-    // }
-  },
+  mounted() {},
   methods: {
     getId() {
       const date = new Date();

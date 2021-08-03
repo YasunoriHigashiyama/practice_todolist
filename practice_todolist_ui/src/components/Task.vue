@@ -77,8 +77,6 @@ export default {
       this.$emit("addTask", task);
     },
     updateStatus() {
-      // console.log(status);
-      // console.log(this.copyTask);
       this.$emit("updateStatus", this.copyTask);
     },
   },

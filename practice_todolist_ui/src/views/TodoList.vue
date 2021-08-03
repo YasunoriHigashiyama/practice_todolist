@@ -93,8 +93,6 @@ export default {
         });
     },
     emitOption(option) {
-      console.log("👀✨");
-      console.log(option);
       this.option = option;
       this.getTasks(option);
     },
@@ -112,7 +110,6 @@ export default {
     },
     updateStatus(task) {
       let param = {};
-      console.log(task);
       param["id"] = task.id;
       param["status"] = task.status;
       this.$axios
