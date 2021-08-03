@@ -5,17 +5,12 @@
       color="white"
       label
       text-color="gray"
-      @click="dialog = true"
+      @click="dialogOpen"
     >
-      <!-- @click="open()" -->
       <v-icon left> mdi-plus </v-icon>
       Add Task
     </v-chip>
-    <CreateTaskDialog
-      :dialog="dialog"
-      @addTask="addTask"
-      @cancel="dialog = false"
-    />
+    <CreateTaskDialog ref="createTaskDialog" @addTask="addTask" />
     <v-spacer></v-spacer>
 
     <v-checkbox
@@ -129,7 +124,6 @@ export default {
 
   data() {
     return {
-      dialog: false,
       select: { number: 20 },
       numberList: [
         { number: 10 },
@@ -176,6 +170,9 @@ export default {
     },
     input() {
       this.updateOption();
+    },
+    dialogOpen() {
+      this.$refs.createTaskDialog.open();
     },
   },
 };

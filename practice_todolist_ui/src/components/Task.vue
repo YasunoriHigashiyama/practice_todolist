@@ -10,6 +10,7 @@
       <v-card-title class="pt-0">
         <v-checkbox
           v-model="copyTask.status"
+          @change="updateStatus($event)"
           class="mb-4"
           color="primary"
           hide-details
@@ -74,6 +75,11 @@ export default {
     },
     addTask(task) {
       this.$emit("addTask", task);
+    },
+    updateStatus() {
+      // console.log(status);
+      // console.log(this.copyTask);
+      this.$emit("updateStatus", this.copyTask);
     },
   },
 };

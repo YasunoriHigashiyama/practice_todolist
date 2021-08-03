@@ -20,6 +20,7 @@
               @edit="editTask"
               @delete="deleteTask(task.id)"
               @addTask="addTask"
+              @updateStatus="updateStatus"
             />
           </div>
         </v-row>
@@ -73,7 +74,7 @@ export default {
     },
     addTask(task) {
       this.$axios
-        .post("/task", task)
+        .post("/create/Task", task)
         .then((response) => {
           this.tasks = response.data.data;
         })
@@ -83,7 +84,7 @@ export default {
     },
     editTask(task) {
       this.$axios
-        .post("/task", task)
+        .post("/edit/Task", task)
         .then((response) => {
           this.tasks = response.data.data;
         })
@@ -104,6 +105,20 @@ export default {
         .then((response) => {
           this.tasks = response.data.data;
           this.option = response.data.option;
+        })
+        .catch((e) => {
+          alert(e);
+        });
+    },
+    updateStatus(task) {
+      let param = {};
+      console.log(task);
+      param["id"] = task.id;
+      param["status"] = task.status;
+      this.$axios
+        .post("/update/status", param)
+        .then((response) => {
+          this.tasks = response.data.data;
         })
         .catch((e) => {
           alert(e);

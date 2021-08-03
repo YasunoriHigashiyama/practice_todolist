@@ -7,7 +7,7 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item @click="dialog = true">
+        <v-list-item @click="dialogOpen">
           <v-list-item-icon
             ><v-icon>mdi-square-edit-outline</v-icon></v-list-item-icon
           ><v-list-item-content>
@@ -28,12 +28,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <CreateTaskDialog
-      :dialog="dialog"
-      :task="task"
-      @addTask="edit"
-      @cancel="dialog = false"
-    />
+    <CreateTaskDialog ref="createTaskDialog" :task="task" @addTask="edit" />
   </div>
 </template>
 
@@ -49,7 +44,6 @@ export default {
     },
   },
   data: () => ({
-    dialog: false,
     selectedItem: 1,
     items: [{ title: "Delete", color: "error", icon: "mdi-trash-can-outline" }],
   }),
@@ -63,8 +57,10 @@ export default {
       }
     },
     edit(task) {
-      this.dialog = false;
       this.$emit("addTask", task);
+    },
+    dialogOpen() {
+      this.$refs.createTaskDialog.open();
     },
   },
 };

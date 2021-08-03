@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-dialog
-      v-model="dialog"
+      v-model="this.dialog"
       transition="dialog-bottom-transition"
       persistent
       max-width="600px"
@@ -102,11 +102,11 @@
             </v-row>
           </v-container>
         </v-card-text>
-        {{ task }}<br />
-        {{ copyTask }}
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" text @click="cancel()"> Cancel </v-btn>
+          <v-btn color="green darken-1" text @click="dialog = false">
+            Cancel
+          </v-btn>
           <v-btn color="green darken-1" text @click="create()"> Create </v-btn>
         </v-card-actions>
       </v-card>
@@ -131,11 +131,10 @@ export default {
         memo: "",
       }),
     },
-    dialog: { type: Boolean, default: false },
   },
   data() {
     return {
-      // dialog: false,
+      dialog: false,
       start: false,
       limit: false,
       copyTask: {},
@@ -158,10 +157,11 @@ export default {
     },
   },
   mounted() {
-    this.copyTask = Object.assign({}, this.task);
-    if (this.copyTask.id.length <= 0) {
-      this.getId();
-    }
+    // console.log(this.task);
+    // this.copyTask = Object.assign({}, this.task);
+    // if (this.copyTask.id.length <= 0) {
+    //   this.getId();
+    // }
   },
   methods: {
     getId() {
@@ -179,9 +179,15 @@ export default {
         return;
       }
       this.$emit("addTask", this.copyTask);
+      this.dialog = false;
     },
-    cancel() {
-      this.$emit("cancel");
+
+    open() {
+      this.copyTask = Object.assign({}, this.task);
+      if (this.copyTask.id.length <= 0) {
+        this.getId();
+      }
+      this.dialog = true;
     },
   },
 };
