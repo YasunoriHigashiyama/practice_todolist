@@ -11,7 +11,11 @@
       <v-icon left> mdi-plus </v-icon>
       Add Task
     </v-chip>
-    <CreateTaskDialog :dialog="dialog" @addTask="addTask" />
+    <CreateTaskDialog
+      :dialog="dialog"
+      @addTask="addTask"
+      @cancel="dialog = false"
+    />
     <v-spacer></v-spacer>
 
     <v-checkbox

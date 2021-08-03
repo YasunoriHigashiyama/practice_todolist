@@ -31,6 +31,7 @@ export default {
         }),
             mock.onPost('/task').reply(config => {
                 console.log("タスクの追加")
+                console.log(config.data)
                 //タスク追加する
                 const res = {
                     data: [{ id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },

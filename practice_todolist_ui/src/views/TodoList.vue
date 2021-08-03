@@ -17,8 +17,9 @@
             <TaskCard
               :ref="task.id"
               :task="task"
-              @emit="emitTask"
+              @edit="editTask"
               @delete="deleteTask(task.id)"
+              @addTask="addTask"
             />
           </div>
         </v-row>
@@ -48,7 +49,7 @@ export default {
         done: true,
         sort: "limit",
         order: "de",
-        number: 10,
+        number: 20,
         search: "",
       },
     };
@@ -80,8 +81,15 @@ export default {
           alert(e);
         });
     },
-    emitTask() {
-      console.log("a");
+    editTask(task) {
+      this.$axios
+        .post("/task", task)
+        .then((response) => {
+          this.tasks = response.data.data;
+        })
+        .catch((e) => {
+          alert(e);
+        });
     },
     emitOption(option) {
       console.log("👀✨");

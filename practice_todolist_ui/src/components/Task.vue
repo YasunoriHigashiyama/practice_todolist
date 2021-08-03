@@ -4,7 +4,8 @@
     <v-card class="mx-auto" width="344">
       <v-row class="mr-3">
         <v-card-subtitle class="ml-3"> {{ copyTask.id }}</v-card-subtitle>
-        <v-spacer></v-spacer><TaskMenu @edit="edit" @delete="del"
+        <v-spacer></v-spacer
+        ><TaskMenu :task="task" @edit="edit" @delete="del" @addTask="addTask"
       /></v-row>
       <v-card-title class="pt-0">
         <v-checkbox
@@ -65,11 +66,14 @@ export default {
     this.copyTask = Object.assign({}, this.task);
   },
   methods: {
-    edit() {
-      this.$emit("edit");
+    edit(task) {
+      this.$emit("edit", task);
     },
     del() {
       this.$emit("delete");
+    },
+    addTask(task) {
+      this.$emit("addTask", task);
     },
   },
 };

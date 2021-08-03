@@ -102,12 +102,11 @@
             </v-row>
           </v-container>
         </v-card-text>
-
+        {{ task }}<br />
+        {{ copyTask }}
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" text @click="dialog = false">
-            Cancel
-          </v-btn>
+          <v-btn color="green darken-1" text @click="cancel()"> Cancel </v-btn>
           <v-btn color="green darken-1" text @click="create()"> Create </v-btn>
         </v-card-actions>
       </v-card>
@@ -158,10 +157,14 @@ export default {
       return message;
     },
   },
-  mounted() {},
+  mounted() {
+    this.copyTask = Object.assign({}, this.task);
+    if (this.copyTask.id.length <= 0) {
+      this.getId();
+    }
+  },
   methods: {
-    open() {
-      this.copyTask = Object.assign({}, this.task);
+    getId() {
       const date = new Date();
       const Y = date.getFullYear();
       const M = ("00" + (date.getMonth() + 1)).slice(-2);
@@ -170,14 +173,15 @@ export default {
       const m = ("00" + date.getMinutes()).slice(-2);
       const s = ("00" + date.getSeconds()).slice(-2);
       this.copyTask["id"] = Y + M + D + h + m + s;
-      this.dialog = true;
     },
     create() {
       if (0 < this.message.length) {
         return;
       }
       this.$emit("addTask", this.copyTask);
-      // this.dialog = false;
+    },
+    cancel() {
+      this.$emit("cancel");
     },
   },
 };
