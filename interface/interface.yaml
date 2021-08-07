@@ -5,7 +5,7 @@ info:
   title: "TODO LIST API"
   termsOfService: "http://swagger.io/terms/"
 paths:
-  /tasks{option}:
+  "/tasks{option}":
     get:
       summary: "タスクの取得"
       description: "optionで指定されたタスクを返却します"
@@ -58,7 +58,7 @@ paths:
           schema:
             type: "object"
             properties:
-              schema:
+              data:
                 type: "array"
                 items:
                   type: "object"
