@@ -25,6 +25,7 @@ export default {
         mock.onGet('/tasks').reply(config => {
             console.log("タスクの全取得")
             console.log(config.params)
+            console.log(config)
 
             //タスクとってくる
             return [200, initialData()]

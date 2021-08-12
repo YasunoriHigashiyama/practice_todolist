@@ -1,17 +1,17 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
   description: "これは研修用のTODOリストに関するAPIです。"
   version: "1.0.0"
   title: "TODO LIST API"
   termsOfService: "http://swagger.io/terms/"
 paths:
-  "/tasks{option}":
+  /tasks{option}:
     get:
       summary: "タスクの取得"
       description: "optionで指定されたタスクを返却します"
       parameters:
         - name: "data"
-          in: "body"
+          in: "query"
           schema:
             type: "object"
             properties:
@@ -51,17 +51,14 @@ paths:
                 type: "string"
                 description: "タスク名の検索"
                 example: ""
-
       responses:
-        200:
+        "200":
           description: "成功時のレスポンス"
-          schema:
-            type: "object"
-            properties:
-              data:
+          content:
+            application/json:
+              schema:
                 type: "array"
                 items:
-                  type: "object"
                   required:
                     - id
                     - title
