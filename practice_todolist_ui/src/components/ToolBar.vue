@@ -174,6 +174,9 @@ export default {
     dialogOpen() {
       this.$refs.createTaskDialog.open();
     },
+    getOption() {
+      return this.defaultOption;
+    },
   },
 };
 </script>

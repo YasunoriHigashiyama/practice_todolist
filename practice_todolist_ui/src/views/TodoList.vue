@@ -8,7 +8,7 @@
           </div>
         </v-row>
         <div class="mt-4 pb-1">
-          <ToolBar @addTask="addTask" @option="emitOption" />
+          <ToolBar ref="option" @addTask="addTask" @option="emitOption" />
         </div>
         <v-divider></v-divider>
 
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+/* eslint no-unused-vars: 0 */
 import ToolBar from "../components/ToolBar.vue";
 import TaskCard from "../components/Task.vue";
 export default {
@@ -45,14 +46,6 @@ export default {
         memo: "",
         status: false,
       },
-      option: {
-        todo: true,
-        done: true,
-        sort: "limit",
-        order: "de",
-        number: 20,
-        search: "",
-      },
     };
   },
   computed: {},
@@ -61,22 +54,25 @@ export default {
   },
   methods: {
     getTasks() {
-      let params = this.option;
+      let params = this.getOption();
       this.$axios
         .get("/tasks", { params })
         .then((response) => {
-          this.tasks = response.data.data;
-          this.option = response.data.option;
+          console.log(response);
+          if (response.status == 200) {
+            this.tasks = response.data.data;
+          }
         })
         .catch((e) => {
           alert(e);
         });
     },
+
     addTask(task) {
       this.$axios
         .post("/create/Task", task)
         .then((response) => {
-          this.tasks = response.data.data;
+          this.getTasks();
         })
         .catch((e) => {
           alert(e);
@@ -86,23 +82,26 @@ export default {
       this.$axios
         .post("/edit/Task", task)
         .then((response) => {
-          this.tasks = response.data.data;
+          this.getTasks();
         })
         .catch((e) => {
           alert(e);
         });
     },
     emitOption(option) {
-      this.option = option;
-      this.getTasks(option);
+      //optionが変更されたときに呼ばれる
+      this.getTasks();
+    },
+    getOption() {
+      //オプションを取得してくる
+      return this.$refs.option.getOption();
     },
     deleteTask(ref) {
       var id = this.$refs[ref][0].task.id;
       this.$axios
         .post("/delete/task", id)
         .then((response) => {
-          this.tasks = response.data.data;
-          this.option = response.data.option;
+          this.getTasks();
         })
         .catch((e) => {
           alert(e);
@@ -115,7 +114,7 @@ export default {
       this.$axios
         .post("/update/status", param)
         .then((response) => {
-          this.tasks = response.data.data;
+          this.getTasks();
         })
         .catch((e) => {
           alert(e);
