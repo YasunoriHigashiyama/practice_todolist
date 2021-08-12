@@ -72,7 +72,9 @@ export default {
       this.$axios
         .post("/create/Task", task)
         .then((response) => {
-          this.getTasks();
+          if (response.status == 200) {
+            this.getTasks();
+          }
         })
         .catch((e) => {
           alert(e);
@@ -82,7 +84,9 @@ export default {
       this.$axios
         .post("/edit/Task", task)
         .then((response) => {
-          this.getTasks();
+          if (response.status == 200) {
+            this.getTasks();
+          }
         })
         .catch((e) => {
           alert(e);
@@ -101,7 +105,9 @@ export default {
       this.$axios
         .post("/delete/task", id)
         .then((response) => {
-          this.getTasks();
+          if (response.status == 200) {
+            this.getTasks();
+          }
         })
         .catch((e) => {
           alert(e);
@@ -114,7 +120,9 @@ export default {
       this.$axios
         .post("/update/status", param)
         .then((response) => {
-          this.getTasks();
+          if (response.status == 200) {
+            this.getTasks();
+          }
         })
         .catch((e) => {
           alert(e);
