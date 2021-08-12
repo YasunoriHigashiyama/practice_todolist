@@ -70,7 +70,7 @@ export default {
 
     addTask(task) {
       this.$axios
-        .post("/create/Task", task)
+        .post("/create/task", task)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
@@ -82,7 +82,7 @@ export default {
     },
     editTask(task) {
       this.$axios
-        .post("/edit/Task", task)
+        .post("/update/task", task)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
@@ -103,7 +103,7 @@ export default {
     deleteTask(ref) {
       var id = this.$refs[ref][0].task.id;
       this.$axios
-        .post("/delete/task", id)
+        .delete("/delete/task", id)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();

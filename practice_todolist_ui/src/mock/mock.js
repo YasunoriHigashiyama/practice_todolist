@@ -30,7 +30,7 @@ export default {
             //タスクとってくる
             return [200, initialData()]
         }),
-            mock.onPost('/create/Task').reply(config => {
+            mock.onPost('/create/task').reply(config => {
                 console.log("タスクの追加")
                 console.log(config)
                 //タスク追加する
@@ -42,8 +42,8 @@ export default {
                 // };
                 return [200]
             }),
-            mock.onPost('/edit/Task').reply(config => {
-                console.log("タスクの追加")
+            mock.onPost('/update/task').reply(config => {
+                console.log("タスクの編集")
                 console.log(config.data)
                 //タスク追加する
                 // const res = {
@@ -79,7 +79,7 @@ export default {
                 return [200]
             }),
 
-            mock.onPost('/delete/task').reply(config => {
+            mock.onDelete('/delete/task').reply(config => {
                 console.log("タスクの削除")
                 // var res = {
                 //     data: [
