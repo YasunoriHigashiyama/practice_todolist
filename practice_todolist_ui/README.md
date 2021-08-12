@@ -5,9 +5,13 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 起動
 ```
 npm run serve
+```
+### mock起動
+```
+npm run mock
 ```
 
 ### Compiles and minifies for production
