@@ -94,3 +94,41 @@ paths:
                       type: boolean
                       description: "タスクのステータス trueの時未完了"
                       example: true
+  /create/Task:
+    post:
+      summary: "タスクの追加"
+      requestBody:
+        description: "新しいタスクを追加します"
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - title
+                - start
+                - limit
+              properties:
+                id:
+                  type: string
+                  description: "タスクの一意のID"
+                title:
+                  type: string
+                  description: "タスクのタイトル"
+                start:
+                  type: string
+                  description: "タスクの開始日YYYY/MM/DD"
+                limit:
+                  type: string
+                  description: "タスクの期限日YYYY/MM/DD"
+                memo:
+                  type: string
+                  description: "タスクの詳細"
+
+      responses:
+        "200":
+          description: "登録成功"
+        "400":
+          description: "Bad Request"
+        "409":
+          description: "ID重複"
