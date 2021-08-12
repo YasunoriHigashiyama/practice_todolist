@@ -10,47 +10,50 @@ paths:
       summary: "タスクの取得"
       description: "optionで指定されたタスクを返却します"
       parameters:
-        - name: "data"
+        - name: todo
           in: "query"
+          description: "trueの時未完了のタスクを返却する"
           schema:
-            type: "object"
-            properties:
-              todo:
-                type: "boolean"
-                description: "trueの時未完了のタスクを返却する"
-                example: true
-                default: true
-              done:
-                type: "boolean"
-                description: "trueの時完了済みのタスクを返却する"
-                example: true
-                default: true
-              sort:
-                type: "string"
-                example: "limit"
-                description: "ソート順\n[start]:タスク開始日\n[linmit]:期限日\n[title]:タスク名"
-                enum:
-                  - "start"
-                  - "limit"
-                  - "title"
-                default: limit
-              order:
-                type: "string"
-                example: "ac"
-                description: "ソート方向\n[ac]:昇順 [de]:降順"
-                enum:
-                  - "de"
-                  - "ac"
-                default: "de"
-              number:
-                type: "integer"
-                description: "表示件数"
-                example: 20
-                default: 20
-              search:
-                type: "string"
-                description: "タスク名の検索"
-                example: ""
+            type: boolean
+            default: true
+            example: true
+        - name: done
+          in: "query"
+          description: "trueの時完了済みのタスクを返却する"
+          schema:
+            type: boolean
+            example: true
+            default: true
+        - name: sort
+          in: "query"
+          description: "ソート順<br/>[start]:タスク開始日<br/>[linmit]:期限日<br/>[title]:タスク名"
+          schema:
+            type: string
+            example: "limit"
+            enum: [start, limit, title]
+            default: limit
+        - name: order
+          in: "query"
+          description: "ソート方向\n<br />[ac]:昇順 <br>[de]:降順"
+          schema:
+            type: string
+            example: "ac"
+            enum: ["de", "ac"]
+            default: "de"
+        - name: number
+          in: "query"
+          description: "表示件数"
+          schema:
+            type: integer
+            example: 20
+            default: 20
+        - name: search
+          in: "query"
+          description: "タスク名の検索"
+          schema:
+            type: "string"
+            default: ""
+            example: ""
       responses:
         "200":
           description: "成功時のレスポンス"

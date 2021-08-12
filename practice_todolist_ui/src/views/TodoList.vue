@@ -54,9 +54,9 @@ export default {
   },
   methods: {
     getTasks() {
-      let params = this.getOption();
+      let option = this.getOption();
       this.$axios
-        .get("/tasks", { params })
+        .get("/tasks", { params: option })
         .then((response) => {
           console.log(response);
           if (response.status == 200) {
