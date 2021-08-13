@@ -1,0 +1,82 @@
+﻿# A5:ER FORMAT:15
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright © 2007 m.matsubara
+# A5:SQL Mk-2 Version 2.16.1 Copyright © 1997 - 2021 m.matsubara
+#  https://a5m2.mmatsubara.com
+
+[Manager]
+ProjectName=
+Author=
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",2,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=14
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=6
+RDBMSTypeName=PostgreSQL
+GenerateComment=0
+GenerateCommentStatement=0
+GenerateCommentStatement_LName=0
+GenerateCommentStatement_Comment=0
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+UpperCaseKeyword=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Entity]
+PName=TASK_MANAGEMENT
+LName=タスク管理
+Comment=
+TableOption=
+Page=MAIN
+Left=100
+Top=100
+Field="ID","ID","@VARCHAR(12)","NOT NULL",0,"","タスクを管理する一意のID",$000000FF,""
+Field="タイトル","TITLE","@VARCHAR(100)","NOT NULL",,"","タスクのタイトル",$FFFFFFFF,""
+Field="開始日","START_DATE","@VARCHAR(10)","NOT NULL",,"","YYYY/MM/DD",$FFFFFFFF,""
+Field="期限日","LIMIT_DATE","@VARCHAR(10)","NOT NULL",,"","YYYY/MM/DD",$FFFFFFFF,""
+Field="メモ","MEMO","@VARCHAR(300)",,,"","タスクのメモ",$FFFFFFFF,""
+Field="タスク完了フラグ","TASK_FLG","@BOOLEAN","NOT NULL",,"","trueのとき完了",$FFFFFFFF,""
+Field="作成日時","CREATE_DATE","@DATETIME",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20210813152439
+Position="MAIN",100,100,1026,440
+ZOrder=3
+
+[Comment]
+Comment=赤:PK\n□:必須
+FontName=Tahoma
+FontBold=0
+FontItalic=0
+FontUnderline=0
+FontSize=14
+FontColor=$000000
+LineColor=$000000
+BkColor=$FFFFFF
+Page=Main
+Left=1446
+Top=67
+ZOrder=4
+Width=648
+Height=230
