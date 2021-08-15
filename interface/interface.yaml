@@ -5,7 +5,7 @@ info:
   title: "TODO LIST API"
   termsOfService: "http://swagger.io/terms/"
 paths:
-  /tasks:
+  /task:
     get:
       summary: "タスクの取得"
       description: "optionで指定されたタスクを返却します"
@@ -94,7 +94,6 @@ paths:
                       type: boolean
                       description: "タスクのステータス trueの時未完了"
                       example: true
-  /create/task:
     post:
       summary: "タスクの追加"
       requestBody:
@@ -132,7 +131,7 @@ paths:
           description: "Bad Request"
         "409":
           description: "登録失敗"
-  /update/task:
+  /task/{id}:
     post:
       summary: "タスクの更新"
       requestBody:
@@ -171,7 +170,26 @@ paths:
           description: "Bad Request"
         "409":
           description: "更新の失敗"
-  /update/status:
+    delete:
+      summary: "タスクの削除"
+      requestBody:
+        description: "タスクを削除します"
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: "タスクの一意のID"
+      responses:
+        "200":
+          description: "削除成功"
+        "409":
+          description: "更新の失敗"
+  /task/{id}/status:
     post:
       summary: "ステータスの更新"
       requestBody:
@@ -195,25 +213,5 @@ paths:
           description: "更新成功"
         "400":
           description: "Bad Request"
-        "409":
-          description: "更新の失敗"
-  /delete/task:
-    post:
-      summary: "タスクの削除"
-      requestBody:
-        description: "タスクを削除します"
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - id
-              properties:
-                id:
-                  type: string
-                  description: "タスクの一意のID"
-      responses:
-        "200":
-          description: "削除成功"
         "409":
           description: "更新の失敗"
