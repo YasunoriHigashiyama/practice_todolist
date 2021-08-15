@@ -171,7 +171,6 @@ paths:
           description: "Bad Request"
         "409":
           description: "更新の失敗"
-
   /update/status:
     post:
       summary: "ステータスの更新"
@@ -198,7 +197,6 @@ paths:
           description: "Bad Request"
         "409":
           description: "更新の失敗"
-
   /delete/task:
     post:
       summary: "タスクの削除"
