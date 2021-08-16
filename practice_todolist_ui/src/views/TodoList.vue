@@ -24,6 +24,15 @@
             />
           </div>
         </v-row>
+        <v-row>
+          <v-col>
+            <Paging
+              ref="page"
+              @paging="getTasks"
+              :pageOption="this.pageOption"
+            />
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -33,8 +42,9 @@
 /* eslint no-unused-vars: 0 */
 import ToolBar from "../components/ToolBar.vue";
 import TaskCard from "../components/Task.vue";
+import Paging from "../components/Paging.vue";
 export default {
-  components: { ToolBar, TaskCard },
+  components: { ToolBar, TaskCard, Paging },
   data() {
     return {
       tasks: [],
@@ -46,6 +56,7 @@ export default {
         memo: "",
         status: false,
       },
+      pageOption: { total: 0, number: 20 },
     };
   },
   mounted() {
@@ -54,11 +65,20 @@ export default {
   methods: {
     getTasks() {
       let option = this.getOption();
+      let page = this.getPage();
+      option["page"] = page;
+      console.log(page);
+      // let page =
       this.$axios
         .get("/tasks", { params: option })
         .then((response) => {
           if (response.status == 200) {
+            // console.log("🎶");
+            // console.log(response.data.paging);
+            // console.log(response.data.paging.total);
             this.tasks = response.data.data;
+            this.pageOption["total"] = response.data.paging.total;
+            this.pageOption["number"] = option.number;
           }
         })
         .catch((e) => {
@@ -109,6 +129,10 @@ export default {
     getOption() {
       //オプションを取得してくる
       return this.$refs.option.getOption();
+    },
+    getPage() {
+      //現在のページを取得してくる
+      return this.$refs.page.getPage();
     },
     deleteTask(ref) {
       var id = this.$refs[ref][0].task.id;
