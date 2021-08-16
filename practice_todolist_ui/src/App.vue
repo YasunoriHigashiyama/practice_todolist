@@ -1,16 +1,18 @@
 <template>
   <v-app>
-    <AppBar />
     <v-main>
+      <v-container fluid>
+        <Alert />
+      </v-container>
       <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import AppBar from "./components/AppBar.vue";
+import Alert from "./components/Alert.vue";
 export default {
-  components: { AppBar },
+  components: { Alert },
   data: () => ({
     //
   }),

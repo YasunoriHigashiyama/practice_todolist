@@ -62,7 +62,11 @@ export default {
           }
         })
         .catch((e) => {
-          alert(e);
+          this.store_setAlert({
+            action: true,
+            message: "error \n" + e,
+            detail: "タスクの取得に失敗しました",
+          });
         });
     },
 
@@ -75,7 +79,11 @@ export default {
           }
         })
         .catch((e) => {
-          alert(e);
+          this.store_setAlert({
+            action: true,
+            message: "error \n" + e,
+            detail: "タスクの追加に失敗しました。",
+          });
         });
     },
     editTask(task) {
@@ -87,7 +95,11 @@ export default {
           }
         })
         .catch((e) => {
-          alert(e);
+          this.store_setAlert({
+            action: true,
+            message: "error \n" + e,
+            detail: "タスクの編集に失敗しました。[id]:" + task.id,
+          });
         });
     },
     emitOption(option) {
@@ -108,7 +120,11 @@ export default {
           }
         })
         .catch((e) => {
-          alert(e);
+          this.store_setAlert({
+            action: true,
+            message: "error \n" + e,
+            detail: "タスクの削除に失敗しました。[id]:" + id,
+          });
         });
     },
     updateStatus(task) {
@@ -123,8 +139,19 @@ export default {
           }
         })
         .catch((e) => {
-          alert(e);
+          this.store_setAlert({
+            action: true,
+            message: "error \n" + e,
+            detail: "タスクのステータスの更新に失敗しました。[id]:" + task.id,
+          });
         });
+    },
+    store_setAlert({ action, message, detail }) {
+      this.$store.dispatch("alert/setAlert", {
+        action: action,
+        message: message,
+        detail: detail,
+      });
     },
   },
 };
