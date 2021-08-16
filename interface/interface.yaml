@@ -5,7 +5,7 @@ info:
   title: "TODO LIST API"
   termsOfService: "http://swagger.io/terms/"
 paths:
-  /tasks{option}:
+  /task:
     get:
       summary: "タスクの取得"
       description: "optionで指定されたタスクを返却します"
@@ -26,7 +26,7 @@ paths:
             default: true
         - name: sort
           in: "query"
-          description: "ソート順<br/>[start]:タスク開始日<br/>[linmit]:期限日<br/>[title]:タスク名"
+          description: "ソート順<br/>[start]:タスク開始日<br/>[limit]:期限日<br/>[title]:タスク名"
           schema:
             type: string
             example: "limit"
@@ -62,39 +62,7 @@ paths:
               schema:
                 type: "array"
                 items:
-                  required:
-                    - id
-                    - title
-                    - start
-                    - limit
-                    - memo
-                    - status
-                  properties:
-                    id:
-                      type: "string"
-                      description: "タスクの一意なID"
-                      example: "202001011234"
-                    title:
-                      type: "string"
-                      description: "タスクのタイトル"
-                      example: "タスクのタイトル"
-                    start:
-                      type: "string"
-                      description: "タスクの開始日"
-                      example: "2020/01/01"
-                    limit:
-                      type: "string"
-                      description: "タスクの期限日"
-                      example: "9999/12/31"
-                    memo:
-                      type: "string"
-                      description: "タスクのメモ"
-                      example: "タスクのメモ"
-                    status:
-                      type: boolean
-                      description: "タスクのステータス trueの時未完了"
-                      example: true
-  /create/task:
+                  "$ref": "#/components/schemas/Task"
     post:
       summary: "タスクの追加"
       requestBody:
@@ -102,37 +70,19 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - id
-                - title
-                - start
-                - limit
-              properties:
-                id:
-                  type: string
-                  description: "タスクの一意のID"
-                title:
-                  type: string
-                  description: "タスクのタイトル"
-                start:
-                  type: string
-                  description: "タスクの開始日YYYY/MM/DD"
-                limit:
-                  type: string
-                  description: "タスクの期限日YYYY/MM/DD"
-                memo:
-                  type: string
-                  description: "タスクの詳細"
-
+              "$ref": "#/components/schemas/ReqCreateTask"
       responses:
         "200":
           description: "登録成功"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ResCreateTask"
         "400":
           description: "Bad Request"
         "409":
           description: "登録失敗"
-  /update/task:
+  /task/{id}:
     post:
       summary: "タスクの更新"
       requestBody:
@@ -171,7 +121,26 @@ paths:
           description: "Bad Request"
         "409":
           description: "更新の失敗"
-  /update/status:
+    delete:
+      summary: "タスクの削除"
+      requestBody:
+        description: "タスクを削除します"
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: "タスクの一意のID"
+      responses:
+        "200":
+          description: "削除成功"
+        "409":
+          description: "更新の失敗"
+  /task/{id}/status:
     post:
       summary: "ステータスの更新"
       requestBody:
@@ -197,23 +166,54 @@ paths:
           description: "Bad Request"
         "409":
           description: "更新の失敗"
-  /delete/task:
-    post:
-      summary: "タスクの削除"
-      requestBody:
-        description: "タスクを削除します"
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - id
-              properties:
-                id:
-                  type: string
-                  description: "タスクの一意のID"
-      responses:
-        "200":
-          description: "削除成功"
-        "409":
-          description: "更新の失敗"
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: "integer"
+          description: "タスクの一意なID"
+          example: "202001011234"
+        title:
+          type: "string"
+          description: "タスクのタイトル"
+          example: "タスクのタイトル"
+        start:
+          type: "string"
+          description: "タスクの開始日"
+          example: "2020/01/01"
+        limit:
+          type: "string"
+          description: "タスクの期限日"
+          example: "9999/12/31"
+        memo:
+          type: "string"
+          description: "タスクのメモ"
+          example: "タスクのメモ"
+        status:
+          type: boolean
+          description: "タスクのステータス trueの時未完了"
+          example: true
+    ReqCreateTask:
+      type: object
+      properties:
+        title:
+          type: string
+          description: "タスクのタイトル"
+        start:
+          type: string
+          description: "タスクの開始日YYYY/MM/DD"
+        limit:
+          type: string
+          description: "タスクの期限日YYYY/MM/DD"
+        memo:
+          type: string
+          description: "タスクの詳細"
+    ResCreateTask:
+      type: object
+      properties:
+        id:
+          type: "integer"
+          description: "タスクの一意なID"
