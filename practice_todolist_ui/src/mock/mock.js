@@ -30,76 +30,28 @@ export default {
             //タスクとってくる
             return [200, initialData()]
         }),
-            mock.onPost('/create/task').reply(config => {
+            mock.onPost('/task').reply(config => {
                 console.log("タスクの追加")
                 console.log(config)
-                //タスク追加する
-                // const res = {
-                //     data: [{ id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
-                //     { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
-                //     { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
-                //     { id: "201901011299", title: '追加した結果のダミータスク', start: '2019/01/01', limit: '2020/01/01', memo: "", status: false }]
-                // };
-                return [200]
-            }),
-            mock.onPost('/update/task').reply(config => {
-                console.log("タスクの編集")
-                console.log(config.data)
-                //タスク追加する
-                // const res = {
-                //     data: [{ id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
-                //     { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
-                //     { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
-                //     { id: "201901011299", title: '追加した結果のダミータスク', start: '2019/01/01', limit: '2020/01/01', memo: "", status: false }]
-                // };
 
                 return [200]
             }),
-            mock.onPost('/update/status').reply(config => {
+            mock.onPut(urlCheck('/task/:id')).reply(config => {
+                console.log("タスクの更新")
+                console.log(config.data)
+
+                return [200]
+            }),
+            mock.onPatch(urlCheck('/task/:id/status')).reply(config => {
                 console.log("ステータスの更新")
                 console.log(config.data)
-                //タスク追加する
-                // const res = {
-                //     data: [{ id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
-                //     { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
-                //     { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
-                //     { id: "201901011299", title: '追加した結果のダミータスク', start: '2019/01/01', limit: '2020/01/01', memo: "", status: false }]
-                // };
-                // return [200, res]
-                // let id = null;
-                // for (var i in res.data) {
-                //     if (res.data[i].id == config.data.id) {
-                //         res.data[i].status = config.data.status
-                //         return [200, res]
-                //     }
-                // }
-                // if (id == null) {
-                //     return [200, res];
-                // }
+
                 return [200]
             }),
 
-            mock.onDelete('/delete/task').reply(config => {
+            mock.onDelete(urlCheck("/task/:id")).reply(config => {
                 console.log("タスクの削除")
-                // var res = {
-                //     data: [
-                //         { id: "202001011234", title: '猫に餌をあげる', start: '2020/01/01', limit: '9999/12/31', memo: "毎日あげること", status: false },
-                //         { id: "202001098765", title: '猫と遊ぶ', start: '2020/01/01', limit: '2021/10/31', memo: "毎日遊ぶこと", status: false },
-                //         { id: "201901011234", title: '猫を飼う', start: '2019/01/01', limit: '2020/01/01', memo: "なるべく早く飼うこと", status: true },
-                //         { id: "201901011299", title: '追加した結果のダミータスク', start: '2019/01/01', limit: '2020/01/01', memo: "", status: false },
-                //     ]
-                // }
-                // let id = null;
 
-                // for (var i in res.data) {
-                //     if (res.data[i].id == config.data) {
-                //         res.data.splice(i, 1);
-                //         return [200, res]
-                //     }
-                // }
-                // if (id == null) {
-                //     return [200, res];
-                // }
                 return [200]
             })
 

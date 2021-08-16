@@ -1,26 +1,26 @@
-ï»¿-- Project Name : noname
--- Date/Time    : 2021/08/13 17:03:04
--- Author       : ssaku
+-- Project Name : noname
+-- Date/Time    : 2021/08/16 12:51:06
 -- RDBMS Type   : PostgreSQL
 -- Application  : A5:SQL Mk-2
 
 /*
-  << æ³¨æ„ï¼ï¼ >>
-  BackupToTempTable, RestoreFromTempTableç–‘ä¼¼å‘½ä»¤ãŒä»˜åŠ ã•ã‚Œã¦ã„ã¾ã™ã€‚
-  ã“ã‚Œã«ã‚ˆã‚Šã€drop table, create table å¾Œã‚‚ãƒ‡ãƒ¼ã‚¿ãŒæ®‹ã‚Šã¾ã™ã€‚
-  ã“ã®æ©Ÿèƒ½ã¯ä¸€æ™‚çš„ã« $$TableName ã®ã‚ˆã†ãªä¸€æ™‚ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆã—ã¾ã™ã€‚
-  ã“ã®æ©Ÿèƒ½ã¯ A5:SQL Mk-2ã§ã®ã¿æœ‰åŠ¹ã§ã‚ã‚‹ã“ã¨ã«æ³¨æ„ã—ã¦ãã ã•ã„ã€‚
+  << ’ˆÓII >>
+  BackupToTempTable, RestoreFromTempTable‹^—–½—ß‚ª•t‰Á‚³‚ê‚Ä‚¢‚Ü‚·B
+  ‚±‚ê‚É‚æ‚èAdrop table, create table Œã‚àƒf[ƒ^‚ªc‚è‚Ü‚·B
+  ‚±‚Ì‹@”\‚Íˆê“I‚É $$TableName ‚Ì‚æ‚¤‚Èˆêƒe[ƒuƒ‹‚ğì¬‚µ‚Ü‚·B
+  ‚±‚Ì‹@”\‚Í A5:SQL Mk-2‚Å‚Ì‚İ—LŒø‚Å‚ ‚é‚±‚Æ‚É’ˆÓ‚µ‚Ä‚­‚¾‚³‚¢B
 */
 
 --* RestoreFromTempTable
 create table TASK_MANAGEMENT (
-  ID character varying(12) not null
+  ID bigserial not null
   , TITLE character varying(100) not null
-  , START_DATE character varying(10) not null
-  , LIMIT_DATE character varying(10) not null
+  , START_DATE timestamp not null
+  , LIMIT_DATE timestamp not null
   , MEMO character varying(300)
-  , TASK_FLG BOOLEAN not null
-  , CREATE_DATE timestamp
+  , TASK_COMPLETE_DATE timestamp
+  , CREATE_DATE timestamp not null
+  , UPDATE_DATE timestamp
   , constraint TASK_MANAGEMENT_PKC primary key (ID)
 ) ;
 

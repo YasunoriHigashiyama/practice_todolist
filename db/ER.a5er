@@ -1,7 +1,7 @@
 ﻿# A5:ER FORMAT:15
 # A5:ER ENCODING:UTF8
 # A5:ER Mk-1 Copyright © 2007 m.matsubara
-# A5:SQL Mk-2 Version 2.16.1 Copyright © 1997 - 2021 m.matsubara
+# A5:SQL Mk-2 Version 2.16.0 Copyright © 1997 - 2021 m.matsubara
 #  https://a5m2.mmatsubara.com
 
 [Manager]
@@ -29,7 +29,6 @@ FooterRight=
 ShowPageoutRelation=1
 RDBMSType=6
 RDBMSTypeName=PostgreSQL
-GenerateComment=0
 GenerateCommentStatement=0
 GenerateCommentStatement_LName=0
 GenerateCommentStatement_Comment=0
@@ -50,18 +49,19 @@ TableOption=
 Page=MAIN
 Left=100
 Top=100
-Field="ID","ID","@VARCHAR(12)","NOT NULL",0,"","タスクを管理する一意のID",$000000FF,""
+Field="ID","ID","bigserial","NOT NULL",0,"","タスクを管理する一意のID",$000000FF,""
 Field="タイトル","TITLE","@VARCHAR(100)","NOT NULL",,"","タスクのタイトル",$FFFFFFFF,""
-Field="開始日","START_DATE","@VARCHAR(10)","NOT NULL",,"","YYYY/MM/DD",$FFFFFFFF,""
-Field="期限日","LIMIT_DATE","@VARCHAR(10)","NOT NULL",,"","YYYY/MM/DD",$FFFFFFFF,""
+Field="開始日","START_DATE","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+Field="期限日","LIMIT_DATE","timestamp","NOT NULL",,"","",$FFFFFFFF,""
 Field="メモ","MEMO","@VARCHAR(300)",,,"","タスクのメモ",$FFFFFFFF,""
-Field="タスク完了フラグ","TASK_FLG","@BOOLEAN","NOT NULL",,"","trueのとき完了",$FFFFFFFF,""
-Field="作成日時","CREATE_DATE","@DATETIME",,,"","",$FFFFFFFF,""
+Field="タスク完了日時","TASK_COMPLETE_DATE","timestamp",,,"","",$FFFFFFFF,""
+Field="作成日時","CREATE_DATE","timestamp","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","UPDATE_DATE","timestamp",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210813152439
-Position="MAIN",100,100,1026,440
+ModifiedDateTime=20210816112241
+Position="MAIN",100,100,1026,537
 ZOrder=3
 
 [Comment]

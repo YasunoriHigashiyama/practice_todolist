@@ -158,16 +158,6 @@ export default {
   },
   mounted() {},
   methods: {
-    getId() {
-      const date = new Date();
-      const Y = date.getFullYear();
-      const M = ("00" + (date.getMonth() + 1)).slice(-2);
-      const D = ("00" + date.getDate()).slice(-2);
-      const h = ("00" + date.getHours()).slice(-2);
-      const m = ("00" + date.getMinutes()).slice(-2);
-      const s = ("00" + date.getSeconds()).slice(-2);
-      this.copyTask["id"] = Y + M + D + h + m + s;
-    },
     create() {
       if (0 < this.message.length) {
         return;
@@ -178,9 +168,7 @@ export default {
 
     open() {
       this.copyTask = Object.assign({}, this.task);
-      if (this.copyTask.id.length <= 0) {
-        this.getId();
-      }
+
       this.dialog = true;
     },
   },
