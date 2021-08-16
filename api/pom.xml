@@ -27,7 +27,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/docs/interface.yaml</inputSpec>
+							<inputSpec>${project.basedir}/../interface/interface.yaml</inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>jp.co.neosystem.kadai.api</apiPackage>
                             <modelPackage>jp.co.neosystem.kadai.model</modelPackage>

@@ -85,35 +85,19 @@ paths:
   /task/{id}:
     post:
       summary: "タスクの更新"
+      parameters:
+        - in: path
+          name: "id"
+          description: "タスクID"
+          required: true
+          schema:
+            type: string
       requestBody:
         description: "タスクを更新します"
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - id
-                - title
-                - start
-                - limit
-                - memo
-              properties:
-                id:
-                  type: string
-                  description: "タスクの一意のID"
-                title:
-                  type: string
-                  description: "タスクのタイトル"
-                start:
-                  type: string
-                  description: "タスクの開始日YYYY/MM/DD"
-                limit:
-                  type: string
-                  description: "タスクの期限日YYYY/MM/DD"
-                memo:
-                  type: string
-                  description: "タスクの詳細"
-
+              "$ref": "#/components/schemas/ReqUpdateTask"
       responses:
         "200":
           description: "更新成功"
@@ -123,6 +107,13 @@ paths:
           description: "更新の失敗"
     delete:
       summary: "タスクの削除"
+      parameters:
+        - in: path
+          name: "id"
+          description: "タスクID"
+          required: true
+          schema:
+            type: string
       requestBody:
         description: "タスクを削除します"
         content:
@@ -143,22 +134,19 @@ paths:
   /task/{id}/status:
     post:
       summary: "ステータスの更新"
+      parameters:
+        - in: path
+          name: "id"
+          description: "タスクID"
+          required: true
+          schema:
+            type: string
       requestBody:
         description: "ステータスを更新します"
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - id
-                - status
-              properties:
-                id:
-                  type: string
-                  description: "タスクの一意のID"
-                status:
-                  type: boolean
-                  description: "タスクのステータス<br>[true]:完了<br>[false]:未完了"
+              "$ref": "#/components/schemas/ReqUpdateTask"
       responses:
         "200":
           description: "更新成功"
@@ -175,7 +163,7 @@ components:
         id:
           type: "integer"
           description: "タスクの一意なID"
-          example: "202001011234"
+          example: "123"
         title:
           type: "string"
           description: "タスクのタイトル"
@@ -198,6 +186,10 @@ components:
           example: true
     ReqCreateTask:
       type: object
+      required:
+        - title
+        - start
+        - limit
       properties:
         title:
           type: string
@@ -217,3 +209,30 @@ components:
         id:
           type: "integer"
           description: "タスクの一意なID"
+    ReqUpdateTask:
+      type: object
+      required:
+        - title
+        - start
+        - limit
+      properties:
+        title:
+          type: string
+          description: "タスクのタイトル"
+        start:
+          type: string
+          description: "タスクの開始日YYYY/MM/DD"
+        limit:
+          type: string
+          description: "タスクの期限日YYYY/MM/DD"
+        memo:
+          type: string
+          description: "タスクの詳細"
+    ReqUpdateTaskStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: boolean
+          description: "タスクのステータス<br>[true]:完了<br>[false]:未完了"
