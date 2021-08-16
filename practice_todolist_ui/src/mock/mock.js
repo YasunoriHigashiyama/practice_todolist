@@ -36,13 +36,13 @@ export default {
 
                 return [200]
             }),
-            mock.onPut('/task').reply(config => {
-                console.log("タスクの編集")
+            mock.onPut(urlCheck('/task/:id')).reply(config => {
+                console.log("タスクの更新")
                 console.log(config.data)
 
                 return [200]
             }),
-            mock.onPatch('/status').reply(config => {
+            mock.onPatch(urlCheck('/task/:id/status')).reply(config => {
                 console.log("ステータスの更新")
                 console.log(config.data)
 

@@ -80,7 +80,7 @@ export default {
     },
     editTask(task) {
       this.$axios
-        .put("/task", task)
+        .put("/task/" + task.id, task)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
@@ -116,7 +116,7 @@ export default {
       param["id"] = task.id;
       param["status"] = task.status;
       this.$axios
-        .patch("/status", param)
+        .patch("/task/" + task.id + "/status", param)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
