@@ -48,7 +48,6 @@ export default {
       },
     };
   },
-  computed: {},
   mounted() {
     this.getTasks();
   },
@@ -58,7 +57,6 @@ export default {
       this.$axios
         .get("/tasks", { params: option })
         .then((response) => {
-          console.log(response);
           if (response.status == 200) {
             this.tasks = response.data.data;
           }
@@ -70,7 +68,7 @@ export default {
 
     addTask(task) {
       this.$axios
-        .post("/create/task", task)
+        .post("/task", task)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
@@ -82,7 +80,7 @@ export default {
     },
     editTask(task) {
       this.$axios
-        .post("/update/task", task)
+        .put("/task", task)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
@@ -103,7 +101,7 @@ export default {
     deleteTask(ref) {
       var id = this.$refs[ref][0].task.id;
       this.$axios
-        .delete("/delete/task", id)
+        .delete("/task/" + id)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
@@ -118,7 +116,7 @@ export default {
       param["id"] = task.id;
       param["status"] = task.status;
       this.$axios
-        .post("/update/status", param)
+        .patch("/status", param)
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
