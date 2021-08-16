@@ -32,35 +32,11 @@
             </thead>
             <tbody>
                     <tr>
-                            <td class="swagger--summary-path" rowspan="1">
-                                <a href="#path--create-task">/create/task</a>
+                            <td class="swagger--summary-path" rowspan="2">
+                                <a href="#path--task">/task</a>
                             </td>
                         <td>
-                            <a href="#operation--create-task-post">POST</a>
-                        </td>
-                        <td>
-                            <p>タスクの追加</p>
-        
-                        </td>
-                    </tr>
-                    <tr>
-                            <td class="swagger--summary-path" rowspan="1">
-                                <a href="#path--delete-task">/delete/task</a>
-                            </td>
-                        <td>
-                            <a href="#operation--delete-task-post">POST</a>
-                        </td>
-                        <td>
-                            <p>タスクの削除</p>
-        
-                        </td>
-                    </tr>
-                    <tr>
-                            <td class="swagger--summary-path" rowspan="1">
-                                <a href="#path--tasks-option-">/tasks{option}</a>
-                            </td>
-                        <td>
-                            <a href="#operation--tasks-option--get">GET</a>
+                            <a href="#operation--task-get">GET</a>
                         </td>
                         <td>
                             <p>タスクの取得</p>
@@ -68,26 +44,44 @@
                         </td>
                     </tr>
                     <tr>
-                            <td class="swagger--summary-path" rowspan="1">
-                                <a href="#path--update-status">/update/status</a>
-                            </td>
                         <td>
-                            <a href="#operation--update-status-post">POST</a>
+                            <a href="#operation--task-post">POST</a>
                         </td>
                         <td>
-                            <p>ステータスの更新</p>
+                            <p>タスクの追加</p>
+        
+                        </td>
+                    </tr>
+                    <tr>
+                            <td class="swagger--summary-path" rowspan="2">
+                                <a href="#path--task--id-">/task/{id}</a>
+                            </td>
+                        <td>
+                            <a href="#operation--task--id--delete">DELETE</a>
+                        </td>
+                        <td>
+                            <p>タスクの削除</p>
+        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#operation--task--id--put">PUT</a>
+                        </td>
+                        <td>
+                            <p>タスクの更新</p>
         
                         </td>
                     </tr>
                     <tr>
                             <td class="swagger--summary-path" rowspan="1">
-                                <a href="#path--update-task">/update/task</a>
+                                <a href="#path--task--id--status">/task/{id}/status</a>
                             </td>
                         <td>
-                            <a href="#operation--update-task-post">POST</a>
+                            <a href="#operation--task--id--status-patch">PATCH</a>
                         </td>
                         <td>
-                            <p>タスクの更新</p>
+                            <p>ステータスの更新</p>
         
                         </td>
                     </tr>
@@ -99,138 +93,11 @@
     <h2>Paths</h2>
     
         
-        <span id="path--create-task"></span>
-            <div id="operation--create-task-post" class="swagger--panel-operation-post panel">
-                <div class="panel-heading">
-                    <div class="operation-summary">&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x8FFD;&#x52A0;</div>
-                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/create/task</strong></h3>
-                </div>
-                <div class="panel-body">
-                    <section class="sw-operation-description">
-                        
-                    </section>
-            
-                    
-                    
-                        <section class="sw-responses">
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>登録成功</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                            </div>
-                                            
-                                            </div>                </dd>
-                                    <dt class="sw-response-400">
-                                        400 Bad Request
-                                    
-                                    </dt>
-                                    <dd class="sw-response-400">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>Bad Request</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                            </div>
-                                            
-                                            </div>                </dd>
-                                    <dt class="sw-response-409">
-                                        409 Conflict
-                                    
-                                    </dt>
-                                    <dd class="sw-response-409">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>登録失敗</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                            </div>
-                                            
-                                            </div>                </dd>
-                            </dl>
-                        </section>
-                </div>
-            </div>
-        
-        <span id="path--delete-task"></span>
-            <div id="operation--delete-task-post" class="swagger--panel-operation-post panel">
-                <div class="panel-heading">
-                    <div class="operation-summary">&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x524A;&#x9664;</div>
-                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/delete/task</strong></h3>
-                </div>
-                <div class="panel-body">
-                    <section class="sw-operation-description">
-                        
-                    </section>
-            
-                    
-                    
-                        <section class="sw-responses">
-                    
-                            <dl>
-                                    <dt class="sw-response-200">
-                                        200 OK
-                                    
-                                    </dt>
-                                    <dd class="sw-response-200">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>削除成功</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                            </div>
-                                            
-                                            </div>                </dd>
-                                    <dt class="sw-response-409">
-                                        409 Conflict
-                                    
-                                    </dt>
-                                    <dd class="sw-response-409">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>更新の失敗</p>
-                                            
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6 sw-response-model">
-                                            </div>
-                                            
-                                            </div>                </dd>
-                            </dl>
-                        </section>
-                </div>
-            </div>
-        
-        <span id="path--tasks-option-"></span>
-            <div id="operation--tasks-option--get" class="swagger--panel-operation-get panel">
+        <span id="path--task"></span>
+            <div id="operation--task-get" class="swagger--panel-operation-get panel">
                 <div class="panel-heading">
                     <div class="operation-summary">&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x53D6;&#x5F97;</div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tasks{option}</strong></h3>
+                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/task</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -285,7 +152,7 @@
                                             <td>
                                                 sort
                                             </td>
-                                            <td><p>ソート順<br/>[start]:タスク開始日<br/>[linmit]:期限日<br/>[title]:タスク名</p>
+                                            <td><p>ソート順<br/>[start]:タスク開始日<br/>[limit]:期限日<br/>[title]:タスク名</p>
                                         </td>
                                             <td>query</td>
                                             <td>
@@ -370,12 +237,10 @@
                         </section>
                 </div>
             </div>
-        
-        <span id="path--update-status"></span>
-            <div id="operation--update-status-post" class="swagger--panel-operation-post panel">
+            <div id="operation--task-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
-                    <div class="operation-summary">&#x30B9;&#x30C6;&#x30FC;&#x30BF;&#x30B9;&#x306E;&#x66F4;&#x65B0;</div>
-                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/update/status</strong></h3>
+                    <div class="operation-summary">&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x8FFD;&#x52A0;</div>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/task</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -383,6 +248,193 @@
                     </section>
             
                     
+                    
+                        <section class="sw-responses">
+                    
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>登録成功</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>                </dd>
+                                    <dt class="sw-response-400">
+                                        400 Bad Request
+                                    
+                                    </dt>
+                                    <dd class="sw-response-400">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Bad Request</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>                </dd>
+                                    <dt class="sw-response-409">
+                                        409 Conflict
+                                    
+                                    </dt>
+                                    <dd class="sw-response-409">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>登録失敗</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>
+        
+        <span id="path--task--id-"></span>
+            <div id="operation--task--id--delete" class="swagger--panel-operation-delete panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x524A;&#x9664;</div>
+                    <h3 class="panel-title"><span class="operation-name">DELETE</span> <strong>/task/{id}</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        
+                    </section>
+            
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                id
+                                            </td>
+                                            <td><p>タスクID</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td>
+                                        <span class="json-property-type">object</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                    
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>削除成功</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>                </dd>
+                                    <dt class="sw-response-409">
+                                        409 Conflict
+                                    
+                                    </dt>
+                                    <dd class="sw-response-409">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>更新の失敗</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>
+            <div id="operation--task--id--put" class="swagger--panel-operation-put panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x66F4;&#x65B0;</div>
+                    <h3 class="panel-title"><span class="operation-name">PUT</span> <strong>/task/{id}</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        
+                    </section>
+            
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                id
+                                            </td>
+                                            <td><p>タスクID</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td>
+                                        <span class="json-property-type">object</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
                     
                         <section class="sw-responses">
                     
@@ -443,11 +495,11 @@
                 </div>
             </div>
         
-        <span id="path--update-task"></span>
-            <div id="operation--update-task-post" class="swagger--panel-operation-post panel">
+        <span id="path--task--id--status"></span>
+            <div id="operation--task--id--status-patch" class="swagger--panel-operation-patch panel">
                 <div class="panel-heading">
-                    <div class="operation-summary">&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x66F4;&#x65B0;</div>
-                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/update/task</strong></h3>
+                    <div class="operation-summary">&#x30B9;&#x30C6;&#x30FC;&#x30BF;&#x30B9;&#x306E;&#x66F4;&#x65B0;</div>
+                    <h3 class="panel-title"><span class="operation-name">PATCH</span> <strong>/task/{id}/status</strong></h3>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
@@ -455,6 +507,37 @@
                     </section>
             
                     
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                id
+                                            </td>
+                                            <td><p>タスクID</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td>
+                                        <span class="json-property-type">object</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
                     
                         <section class="sw-responses">
                     

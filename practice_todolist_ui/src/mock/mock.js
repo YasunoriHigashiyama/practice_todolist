@@ -51,6 +51,7 @@ export default {
 
             mock.onDelete(urlCheck("/task/:id")).reply(config => {
                 console.log("タスクの削除")
+                console.log(config)
 
                 return [200]
             })

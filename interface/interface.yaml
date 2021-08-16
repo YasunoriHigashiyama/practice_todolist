@@ -83,7 +83,7 @@ paths:
         "409":
           description: "登録失敗"
   /task/{id}:
-    post:
+    put:
       summary: "タスクの更新"
       parameters:
         - in: path
@@ -132,7 +132,7 @@ paths:
         "409":
           description: "更新の失敗"
   /task/{id}/status:
-    post:
+    patch:
       summary: "ステータスの更新"
       parameters:
         - in: path

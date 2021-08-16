@@ -1,17 +1,9 @@
--- Project Name : noname
--- Date/Time    : 2021/08/16 12:51:06
+ï»¿-- Project Name : noname
+-- Date/Time    : 2021/08/16 15:47:52
+-- Author       : ssaku
 -- RDBMS Type   : PostgreSQL
 -- Application  : A5:SQL Mk-2
 
-/*
-  << ’ˆÓII >>
-  BackupToTempTable, RestoreFromTempTable‹^—–½—ß‚ª•t‰Á‚³‚ê‚Ä‚¢‚Ü‚·B
-  ‚±‚ê‚É‚æ‚èAdrop table, create table Œã‚àƒf[ƒ^‚ªc‚è‚Ü‚·B
-  ‚±‚Ì‹@”\‚Íˆê“I‚É $$TableName ‚Ì‚æ‚¤‚Èˆêƒe[ƒuƒ‹‚ğì¬‚µ‚Ü‚·B
-  ‚±‚Ì‹@”\‚Í A5:SQL Mk-2‚Å‚Ì‚İ—LŒø‚Å‚ ‚é‚±‚Æ‚É’ˆÓ‚µ‚Ä‚­‚¾‚³‚¢B
-*/
-
---* RestoreFromTempTable
 create table TASK_MANAGEMENT (
   ID bigserial not null
   , TITLE character varying(100) not null
@@ -22,5 +14,5 @@ create table TASK_MANAGEMENT (
   , CREATE_DATE timestamp not null
   , UPDATE_DATE timestamp
   , constraint TASK_MANAGEMENT_PKC primary key (ID)
-) ;
+);
 

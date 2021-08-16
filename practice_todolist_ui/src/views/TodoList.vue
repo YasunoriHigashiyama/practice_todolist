@@ -101,7 +101,7 @@ export default {
     deleteTask(ref) {
       var id = this.$refs[ref][0].task.id;
       this.$axios
-        .delete("/task/" + id)
+        .delete("/task/" + id, { id: id })
         .then((response) => {
           if (response.status == 200) {
             this.getTasks();
