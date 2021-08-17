@@ -1,7 +1,5 @@
 <template>
   <div class="text-center">
-    {{ pageLength }}
-    😍 {{ pageOption }}
     <v-pagination
       v-model="pageNumber"
       :length="pageLength"
