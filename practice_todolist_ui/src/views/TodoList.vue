@@ -72,7 +72,7 @@ export default {
       console.log(page);
       // let page =
       this.$axios
-        .get("/tasks", { params: option })
+        .get("/task", { params: option })
         .then((response) => {
           if (response.status == 200) {
             this.tasks = response.data.data;
