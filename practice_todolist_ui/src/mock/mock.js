@@ -61,7 +61,7 @@ export default {
     urlCheck,
     run: client => {
         const mock = new MockAdapter(axios)
-        mock.onGet('/tasks').reply(config => {
+        mock.onGet('/task').reply(config => {
             console.log("タスクの全取得")
             console.log(config.params)
             console.log("表示数:" + config.params.number)
