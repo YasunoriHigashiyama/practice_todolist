@@ -4,6 +4,8 @@ import jp.co.neosystem.kadai.api.TaskApi;
 import jp.co.neosystem.kadai.api.entity.TaskEntity;
 import jp.co.neosystem.kadai.api.service.TaskService;
 import jp.co.neosystem.kadai.model.Task;
+import jp.co.neosystem.kadai.model.TaskData;
+import jp.co.neosystem.kadai.model.TaskPaging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,22 +26,29 @@ public class TaskApiImpl implements TaskApi {
 	private TaskService taskService;
 
 	@Override
-	public ResponseEntity<List<Task>> taskGet(Boolean todo, Boolean done, String sort,
-											  String order, Integer number, String search) {
+	public ResponseEntity<Task> taskGet(Boolean todo, Boolean done, String sort,
+											  String order, Integer number, String search, Integer page) {
 
 		LOGGER.info("todo: " + todo);
 
-		List<Task> result = new ArrayList<>();
+		List<TaskData> data = new ArrayList<>();
 		for (var entity : taskService.findAll()) {
-			Task task = entityToBean(entity);
-			result.add(task);
+			var d = entityToBean(entity);
+			data.add(d);
 		}
+
+		TaskPaging paging = new TaskPaging();
+		paging.setTotal(1);
+
+		Task result = new Task();
+		result.setData(data);
+		result.setPaging(paging);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
-	private Task entityToBean(TaskEntity entity) {
+	private TaskData entityToBean(TaskEntity entity) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-		Task task = new Task();
+		TaskData task = new TaskData();
 		Long id = entity.getId();
 		task.setId((int) id.longValue());
 		task.setStart(format.format(entity.getStartDate()));
