@@ -11,7 +11,7 @@
           <ToolBar ref="option" @addTask="addTask" @option="emitOption" />
         </div>
         <v-divider></v-divider>
-
+        {{ this.tasks.length }}/{{ this.pageOption["total"] }}
         <v-row class="mt-3">
           <div v-for="task in tasks" :key="task.title">
             <TaskCard
@@ -57,6 +57,8 @@ export default {
         status: false,
       },
       pageOption: { total: 0, number: 20 },
+      total: 0,
+      getNumber: 0,
     };
   },
   mounted() {
@@ -73,9 +75,6 @@ export default {
         .get("/tasks", { params: option })
         .then((response) => {
           if (response.status == 200) {
-            // console.log("🎶");
-            // console.log(response.data.paging);
-            // console.log(response.data.paging.total);
             this.tasks = response.data.data;
             this.pageOption["total"] = response.data.paging.total;
             this.pageOption["number"] = option.number;
