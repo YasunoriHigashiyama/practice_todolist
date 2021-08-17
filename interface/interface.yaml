@@ -13,6 +13,7 @@ paths:
         - name: todo
           in: "query"
           description: "trueの時未完了のタスクを返却する"
+          required: true
           schema:
             type: boolean
             default: true
@@ -20,6 +21,7 @@ paths:
         - name: done
           in: "query"
           description: "trueの時完了済みのタスクを返却する"
+          required: true
           schema:
             type: boolean
             example: true
@@ -27,6 +29,7 @@ paths:
         - name: sort
           in: "query"
           description: "ソート順<br/>[start]:タスク開始日<br/>[limit]:期限日<br/>[title]:タスク名"
+          required: true
           schema:
             type: string
             example: "limit"
@@ -35,6 +38,7 @@ paths:
         - name: order
           in: "query"
           description: "ソート方向\n<br />[ac]:昇順 <br>[de]:降順"
+          required: true
           schema:
             type: string
             example: "ac"
@@ -43,6 +47,7 @@ paths:
         - name: number
           in: "query"
           description: "表示件数"
+          required: true
           schema:
             type: integer
             example: 20
@@ -50,19 +55,27 @@ paths:
         - name: search
           in: "query"
           description: "タスク名の検索"
+          required: true
           schema:
             type: "string"
             default: ""
             example: ""
+        - name: page
+          in: "query"
+          description: "ページ番号"
+          required: true
+          schema:
+            type: integer
+            default: 1
+            example: 1
       responses:
         "200":
           description: "成功時のレスポンス"
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  "$ref": "#/components/schemas/Task"
+                type: object
+                "$ref": "#/components/schemas/Task"
     post:
       summary: "タスクの追加"
       requestBody:
@@ -159,31 +172,55 @@ components:
   schemas:
     Task:
       type: object
+      required:
+        - paging
+        - data
       properties:
-        id:
-          type: "integer"
-          description: "タスクの一意なID"
-          example: "123"
-        title:
-          type: "string"
-          description: "タスクのタイトル"
-          example: "タスクのタイトル"
-        start:
-          type: "string"
-          description: "タスクの開始日"
-          example: "2020/01/01"
-        limit:
-          type: "string"
-          description: "タスクの期限日"
-          example: "9999/12/31"
-        memo:
-          type: "string"
-          description: "タスクのメモ"
-          example: "タスクのメモ"
-        status:
-          type: boolean
-          description: "タスクのステータス trueの時未完了"
-          example: true
+        paging:
+          type: object
+          required:
+            - total
+          properties:
+            total:
+              type: integer
+              description: "全データの件数"
+              example: 40
+        data:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - title
+              - start
+              - limit
+              - status
+            properties:
+              id:
+                type: "integer"
+                description: "タスクの一意なID"
+                example: "123"
+              title:
+                type: "string"
+                description: "タスクのタイトル"
+                example: "タスクのタイトル"
+              start:
+                type: "string"
+                description: "タスクの開始日"
+                example: "2020/01/01"
+              limit:
+                type: "string"
+                description: "タスクの期限日"
+                example: "9999/12/31"
+              memo:
+                type: "string"
+                description: "タスクのメモ"
+                example: "タスクのメモ"
+              status:
+                type: boolean
+                description: "タスクのステータス trueの時未完了"
+                example: true
+
     ReqCreateTask:
       type: object
       required:
