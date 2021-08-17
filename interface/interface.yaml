@@ -127,18 +127,6 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        description: "タスクを削除します"
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - id
-              properties:
-                id:
-                  type: string
-                  description: "タスクの一意のID"
       responses:
         "200":
           description: "削除成功"
