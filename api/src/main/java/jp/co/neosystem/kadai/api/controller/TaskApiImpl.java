@@ -1,6 +1,7 @@
 package jp.co.neosystem.kadai.api.controller;
 
 import jp.co.neosystem.kadai.api.TaskApi;
+import jp.co.neosystem.kadai.api.entity.TaskEntity;
 import jp.co.neosystem.kadai.api.service.TaskService;
 import jp.co.neosystem.kadai.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +29,22 @@ public class TaskApiImpl implements TaskApi {
 
 		LOGGER.info("todo: " + todo);
 
+		List<Task> result = new ArrayList<>();
 		for (var entity : taskService.findAll()) {
-			LOGGER.info(entity.getMemo());
+			Task task = entityToBean(entity);
+			result.add(task);
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+
+	private Task entityToBean(TaskEntity entity) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		Task task = new Task();
+		Long id = entity.getId();
+		task.setId((int) id.longValue());
+		task.setStart(format.format(entity.getStartDate()));
+		task.setLimit(format.format(entity.getLimitDate()));
+		task.setMemo(entity.getMemo());
+		return task;
 	}
 }
