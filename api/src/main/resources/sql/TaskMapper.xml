@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.neosystem.kadai.api.mapper.TaskMapper">
+    <select id="select" resultType="jp.co.neosystem.kadai.api.entity.TaskEntity">
+        select
+        *
+        from
+        TASK_MANAGEMENT
+        where
+        title like #{search} {escape '$'}
+        <if test="all == false">
+            <if test="todo != false">
+                and task_complete_date is null
+            </if>
+            <if test="todo == false">
+                and task_complete_date is not null
+            </if>
+        </if>
+        order by
+        <if test="sort == 'start'">
+            start_date
+        </if>
+        <if test="sort == 'limit'">
+            limit_date
+        </if>
+        <if test="sort == 'title'">
+            title
+        </if>
+        <if test="order == 'ac'">
+            ASC
+        </if>
+        <if test="order == 'de'">
+            DESC
+        </if>
+        , id
+        limit #{limit} offset #{offset}
+    </select>
+    <select id="count" resultType="long">
+        select
+            count(1)
+        from
+            TASK_MANAGEMENT
+        where
+            title like #{search} {escape '$'}
+        <if test="all == false">
+        <if test="todo != false">
+            and task_complete_date is null
+        </if>
+        <if test="todo == false">
+            and task_complete_date is not null
+        </if>
+        </if>
+    </select>
+</mapper>

@@ -14,7 +14,12 @@ public class TaskService {
 	private TaskMapper taskMapper;
 
 	@Transactional
-	public List<TaskEntity> findAll() {
-		return taskMapper.findAll();
+	public List<TaskEntity> select(boolean all, String search, boolean todo, String sort, String order, int limit, int offset) {
+		return taskMapper.select(all, search, todo, sort, order, limit, offset);
+	}
+
+	@Transactional
+	public long count(boolean all, String search, boolean todo) {
+		return taskMapper.count(all, search, todo);
 	}
 }
