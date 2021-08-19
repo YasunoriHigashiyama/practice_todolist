@@ -89,38 +89,38 @@ export default {
             res["paging"] = { total: dataList.length }
             let startIndex = config.params.number * (config.params.page - 1)
             let endIndex = (config.params.number * config.params.page)
-            console.log("startIndex:" + startIndex)
-            console.log("endIndex:" + endIndex)
-            console.log(dataList.length)
+            // console.log("startIndex:" + startIndex)
+            // console.log("endIndex:" + endIndex)
+            // console.log(dataList.length)
             if (dataList.length < startIndex) { res["data"] = dataList } else {
                 res["data"] = dataList.slice(startIndex, endIndex)
             }
-            console.log(res["data"].length)
+            // console.log(res["data"].length)
             //タスクとってくる
             return [200, res]
         }),
             mock.onPost('/task').reply(config => {
                 console.log("タスクの追加")
-                console.log(config)
+                // console.log(config)
 
                 return [200]
             }),
             mock.onPut(urlCheck('/task/:id')).reply(config => {
                 console.log("タスクの更新")
-                console.log(config.data)
+                // console.log(config.data)
 
                 return [200]
             }),
             mock.onPatch(urlCheck('/task/:id/status')).reply(config => {
                 console.log("ステータスの更新")
-                console.log(config.data)
+                // console.log(config.data)
 
                 return [200]
             }),
 
             mock.onDelete(urlCheck("/task/:id")).reply(config => {
                 console.log("タスクの削除")
-                console.log(config)
+                // console.log(config)
 
                 return [200]
             })
