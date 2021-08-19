@@ -27,5 +27,3 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### 画面デモ
-[TODO LIST](https://suechon.github.io/practice_todolist/)
