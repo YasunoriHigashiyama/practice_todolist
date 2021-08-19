@@ -15,13 +15,13 @@ export let client = axios.create({
 })
 
 // モック起動
-if (JSON.parse(process.env.VUE_APP_USE_MOCK)) {
-  client = axios.create({
-    baseURL: "",
-  })
-  console.log("run mock")
-  mock.run(client)
-}
+// if (JSON.parse(process.env.VUE_APP_USE_MOCK)) {
+client = axios.create({
+  baseURL: "",
+})
+// console.log("run mock")
+mock.run(client)
+// }
 
 
 // interceptors
