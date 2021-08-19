@@ -81,7 +81,7 @@ public class TaskApiImpl implements TaskApi {
 	}
 
 	@Override
-	public ResponseEntity<Void> taskIdStatusPatch(String id, ReqUpdateTask reqUpdateTask) {
+	public ResponseEntity<Void> taskIdStatusPatch(String id, ReqUpdateTaskStatus reqUpdateTask) {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
