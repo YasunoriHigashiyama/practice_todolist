@@ -69,8 +69,6 @@ export default {
       let option = this.getOption();
       let page = this.getPage();
       option["page"] = page;
-      console.log(page);
-      // let page =
       this.$axios
         .get("/task", { params: option })
         .then((response) => {

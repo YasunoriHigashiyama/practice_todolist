@@ -53,12 +53,10 @@ export default {
   methods: {
     getNumber(number) {
       this.pageNumber = number;
-      console.log("ページ切り替え");
+
       this.$emit("paging");
     },
-    newPage() {},
     getPage() {
-      console.log("ページ数取得");
       return this.pageNumber;
     },
   },
