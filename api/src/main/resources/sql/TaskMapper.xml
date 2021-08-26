@@ -51,4 +51,16 @@
         </if>
         </if>
     </select>
+    <insert id="insertTask" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO TASK_MANAGEMENT (TITLE, START_DATE, LIMIT_DATE, MEMO, CREATE_DATE) values (#{title}, #{startDate}, #{limitDate}, #{memo}, #{createDate})
+    </insert>
+    <update id="updateTask">
+        UPDATE TASK_MANAGEMENT SET TITLE=#{title}, START_DATE=#{startDate}, LIMIT_DATE=#{limitDate}, MEMO=#{memo}, UPDATE_DATE=#{updateDate} where id=#{id}
+    </update>
+    <update id="updateTaskStatus">
+        UPDATE TASK_MANAGEMENT SET task_complete_date=#{taskCompleteDate}, UPDATE_DATE=#{updateDate} where id=#{id}
+    </update>
+    <delete id="deleteTask">
+        DELETE FROM TASK_MANAGEMENT WHERE id=#{id}
+    </delete>
 </mapper>

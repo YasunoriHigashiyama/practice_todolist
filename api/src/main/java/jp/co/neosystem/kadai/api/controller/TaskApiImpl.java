@@ -10,8 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,22 +75,62 @@ public class TaskApiImpl implements TaskApi {
 
 	@Override
 	public ResponseEntity<Void> taskIdDelete(String id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		taskService.deleteTask(Long.parseLong(id));
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<Void> taskIdPut(String id, ReqUpdateTask reqUpdateTask) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
+		TaskEntity taskEntity = new TaskEntity();
+		taskEntity.setId(Long.parseLong(id));
+		taskEntity.setTitle(reqUpdateTask.getTitle());
+		taskEntity.setMemo(reqUpdateTask.getMemo());
+		try {
+			taskEntity.setStartDate(format.parse(reqUpdateTask.getStart()));
+			taskEntity.setLimitDate(format.parse(reqUpdateTask.getLimit()));
+		} catch (ParseException e) {
+			LOGGER.warn(e.getMessage(), e);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		taskService.updateTask(taskEntity);
+
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<Void> taskIdStatusPatch(String id, ReqUpdateTaskStatus reqUpdateTask) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+		Date taskCompleteDate = null;
+		if (reqUpdateTask.getStatus() != null && reqUpdateTask.getStatus()) {
+			taskCompleteDate = new Date();
+		}
+
+		taskService.updateTaskStatus(Long.parseLong(id), taskCompleteDate);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<ResCreateTask> taskPost(ReqCreateTask reqCreateTask) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		TaskEntity taskEntity = new TaskEntity();
+		taskEntity.setTitle(reqCreateTask.getTitle());
+		taskEntity.setMemo(reqCreateTask.getMemo());
+		try {
+			taskEntity.setStartDate(format.parse(reqCreateTask.getStart()));
+			taskEntity.setLimitDate(format.parse(reqCreateTask.getLimit()));
+		} catch (ParseException e) {
+			LOGGER.warn(e.getMessage(), e);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		taskService.insertTask(taskEntity);
+		LOGGER.info("id == {}", taskEntity.getId());
+
+		ResCreateTask response = new ResCreateTask();
+		response.setId(taskEntity.getId().intValue());
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
 	private TaskData entityToBean(TaskEntity entity) {
